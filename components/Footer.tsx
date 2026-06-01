@@ -50,7 +50,7 @@ export default function Footer() {
               </p>
 
               <a
-                href="https://maps.google.com"
+                href="https://www.google.com/maps/place/Inspektorat+Prov.+Sulut/@1.4697169,124.8440302,17z/data=!3m1!4b1!4m6!3m5!1s0x328774d8d9e91c41:0xcd26e7cb65874d6f!8m2!3d1.4697115!4d124.8466051!16s%2Fg%2F11c3yr76lw?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
                 className="inline-block text-white hover:text-blue-300 text-xs font-medium transition"
               >
