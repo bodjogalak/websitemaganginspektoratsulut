@@ -131,6 +131,11 @@ export default function RegisterForm() {
                 Masuk di sini
             </Link>
         </p>
+        
+        <a href="/" className="text-sm font-medium text-gray-500 transition-colors duration-200 hover:text-blue-600">
+    ← Kembali
+  </a>
     </form>
+    
   );
 }

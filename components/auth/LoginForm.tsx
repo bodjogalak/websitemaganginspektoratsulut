@@ -68,6 +68,7 @@ export default function LoginPage() {
       {/* Tambahkan 'overflow-y-auto' agar kalau layar user kependekan, cuma bagian ini yang scroll */}
       <div className="w-full lg:w-1/2 flex items-center justify-center bg-gray-50 p-4 overflow-y-auto">
         
+        
         {/* Kurangi padding card dari p-10 jadi p-8 */}
         <div className="w-full max-w-md space-y-6 bg-white p-8 rounded-2xl shadow-xl">
           
@@ -167,6 +168,12 @@ export default function LoginPage() {
               Daftar Magang
             </Link>
           </p>
+         <div>
+  <a href="/" className="text-sm font-medium text-gray-500 transition-colors duration-200 hover:text-blue-600">
+    ← Kembali
+  </a>
+</div>
+
         </div>
       </div>
     </div>
