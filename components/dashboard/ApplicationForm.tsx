@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, Save, UploadCloud, Camera, User, FileText, CheckCircle } from "lucide-react";
+import { Loader2, Save, UploadCloud, Camera, User, FileText, CheckCircle, X } from "lucide-react";
 
 export default function ApplicationForm({ user, existingApp }: { user: any, existingApp: any }) {
   const router = useRouter();
@@ -165,42 +165,64 @@ export default function ApplicationForm({ user, existingApp }: { user: any, exis
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* CV Upload Box */}
-            <div className={`border-2 border-dashed rounded-xl p-6 text-center transition relative group cursor-pointer ${cvName ? 'border-[#1193b5] bg-blue-50/30' : 'border-gray-200 hover:bg-gray-50'}`}>
-                <input 
-                    name="cv" 
-                    type="file" 
-                    accept=".pdf" 
-                    className="absolute inset-0 opacity-0 cursor-pointer z-10" 
-                    onChange={(e) => setCvName(e.target.files?.[0]?.name || null)}
-                />
-                
-                <div className="flex flex-col items-center pointer-events-none">
-                    {/* Icon Changes based on state */}
-                    {cvName ? (
-                        <FileText className="mx-auto text-[#1193b5] mb-2 animate-bounce" size={32} />
-                    ) : (
-                        <UploadCloud className="mx-auto text-gray-400 group-hover:text-[#1193b5] mb-2 transition" size={32} />
-                    )}
+<div className={`border-2 border-dashed rounded-xl p-6 text-center transition relative group ${cvName ? 'border-[#1193b5] bg-blue-50/30' : 'border-gray-200 hover:bg-gray-50'}`}>
+    {/* Input file asli (z-10 agar berada di atas konten visual) */}
+    <input 
+        id="cv-input"
+        name="cv" 
+        type="file" 
+        accept=".pdf" 
+        className="absolute inset-0 opacity-0 cursor-pointer z-10" 
+        onChange={(e) => setCvName(e.target.files?.[0]?.name || null)}
+    />
+    
+    {/* Konten Visual (pointer-events-none agar tidak mengganggu klik pada input) */}
+    <div className="flex flex-col items-center pointer-events-none">
+        {/* Ikon Dinamis */}
+        {cvName ? (
+            <FileText className="mx-auto text-[#1193b5] mb-2 animate-bounce" size={32} />
+        ) : (
+            <UploadCloud className="mx-auto text-gray-400 group-hover:text-[#1193b5] mb-2 transition" size={32} />
+        )}
 
-                    <p className="text-sm font-bold text-gray-600">Curriculum Vitae (CV)</p>
-                    
-                    {/* Dynamic Status Text */}
-                    {cvName ? (
-                        <p className="text-sm font-medium text-[#1193b5] mt-2 px-3 py-1 bg-white border border-blue-100 rounded-lg shadow-sm truncate max-w-full">
-                            📄 {cvName}
-                        </p>
-                    ) : (
-                        <>
-                            <p className="text-xs text-gray-400 mt-1">Klik untuk upload file baru</p>
-                            {existingApp?.cvUrl && (
-                                <span className="inline-flex items-center gap-1 text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded-md mt-3 border border-green-100">
-                                    <CheckCircle size={12} /> Sudah ada file
-                                </span>
-                            )}
-                        </>
-                    )}
-                </div>
+        <p className="text-sm font-bold text-gray-600">
+            Curriculum Vitae (CV) <span className="text-xs font-normal text-gray-400">(Opsional)</span>
+        </p>
+        
+        {/* Status File Dinamis */}
+        {cvName ? (
+            <div className="flex items-center gap-2 mt-2 max-w-full z-20 pointer-events-auto">
+                <p className="text-sm font-medium text-[#1193b5] px-3 py-1 bg-white border border-blue-100 rounded-lg shadow-sm truncate max-w-[200px]">
+                    📄 {cvName}
+                </p>
+                {/* Tombol Hapus Pilihan Berkas */}
+                <button
+                    type="button"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setCvName(null);
+                        const input = document.getElementById('cv-input') as HTMLInputElement;
+                        if (input) input.value = ''; // Reset nilai input file asli
+                    }}
+                    className="p-1 text-red-500 bg-red-50 hover:bg-red-100 rounded-md transition"
+                    title="Hapus file terpilih"
+                >
+                    <X size={14} />
+                </button>
             </div>
+        ) : (
+            <>
+                <p className="text-xs text-gray-400 mt-1">Klik untuk upload file baru</p>
+                {existingApp?.cvUrl && (
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded-md mt-3 border border-green-100">
+                        <CheckCircle size={12} /> Sudah ada file
+                    </span>
+                )}
+            </>
+        )}
+    </div>
+</div>
+
 
             {/* Letter Upload Box */}
             <div className={`border-2 border-dashed rounded-xl p-6 text-center transition relative group cursor-pointer ${letterName ? 'border-[#1193b5] bg-blue-50/30' : 'border-gray-200 hover:bg-gray-50'}`}>
@@ -208,6 +230,7 @@ export default function ApplicationForm({ user, existingApp }: { user: any, exis
                     name="letter" 
                     type="file" 
                     accept=".pdf" 
+                    required={!existingApp?.letterUrl}
                     className="absolute inset-0 opacity-0 cursor-pointer z-10" 
                     onChange={(e) => setLetterName(e.target.files?.[0]?.name || null)}
                 />
