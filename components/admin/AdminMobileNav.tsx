@@ -91,15 +91,24 @@ export default function AdminMobileNav({ session }: { session: Session | null })
             </nav>
 
             {/* Logout Button */}
-            <div className="border-t border-slate-700 pt-4 mt-auto">
-              <button
-                onClick={() => signOut()}
-                className="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
-              >
-                <LogOut size={20} />
-                <span>Keluar</span>
-              </button>
-            </div>
+            <div>
+  <div className="p-4 border-t border-gray-700">
+  {/* Mengubah <button> menjadi <a> */}
+  <a
+    href="/" 
+    onClick={(e) => {
+      e.preventDefault(); // Wajib ditambahkan agar tidak langsung mental ke localhost saat di-klik
+      signOut({ callbackUrl: "/" });
+    }}
+    className="flex items-center gap-3 w-full px-4 py-3 text-red-400 hover:bg-red-500/10 hover:text-red-300 rounded-lg transition text-sm font-medium cursor-pointer"
+  >
+    <LogOut size={18} />
+    Keluar
+  </a>
+</div>
+
+</div>
+
           </div>
         </div>
       )}

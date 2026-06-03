@@ -70,7 +70,7 @@ export default function Footer() {
                 <span className="bg-blue-800 p-2 rounded-full text-blue-400">
                   📞
                 </span>
-                <span>(0431) 851001</span>
+                <span>859000</span>
               </li>
 
               <li className="flex items-center gap-3">

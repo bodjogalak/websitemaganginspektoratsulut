@@ -41,6 +41,7 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+
   callbacks: {
     async session({ session, token }) {
       if (session?.user) {
@@ -56,5 +57,7 @@ export const authOptions: AuthOptions = {
       }
       return token;
     },
+
   },
+  
 };
