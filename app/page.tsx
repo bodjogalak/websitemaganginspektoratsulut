@@ -96,15 +96,9 @@ export default async function LandingPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div className="p-8 rounded-2xl border border-gray-100 bg-white hover:shadow-xl hover:border-blue-100 transition duration-300 group">
-                    <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition duration-300">
-                        <Briefcase size={28} />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Real Projects</h3>
-                    <p className="text-gray-500 leading-relaxed">Bukan sekadar bikin kopi. Anda akan terlibat dalam pengembangan aplikasi layanan publik dan pengelolaan data riil.</p>
-                </div>
+                
                 <div className="p-8 rounded-2xl border border-gray-100 bg-white hover:shadow-xl hover:border-purple-100 transition duration-300 group">
-                    <div className="w-14 h-14 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-3 transition duration-300">
+                   <div className="w-14 h-14 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-3 transition duration-300">
                         <Users size={28} />
                     </div>
                     <h3 className="text-xl font-bold text-gray-900 mb-3">Expert Mentorship</h3>

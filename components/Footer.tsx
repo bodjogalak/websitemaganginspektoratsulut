@@ -77,7 +77,7 @@ export default function Footer() {
                 <span className="bg-blue-800 p-2 rounded-full text-blue-400">
                   ✉️
                 </span>
-                <span>diskominfo@sulutprov.go.id</span>
+                <span>itprov.sulut@gmail.com</span>
               </li>
 
               <li className="text-xs text-blue-50/90 pt-2">
