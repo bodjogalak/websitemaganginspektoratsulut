@@ -52,7 +52,13 @@ The app uses a custom color palette defined in `app/globals.css`:
     npx prisma db seed
     ```
 
-4.  **Run the App**
+4. **install library pembuat pdf lokal**
+    periksa ini terinstall dulu diterminal di proyek kita, supaya kalau npm run dev tidak muncul error nantinya
+    ```bash
+    npm install jspdf
+    ```
+    
+6.  **Run the App**
     ```bash
     npm run dev
     ```
