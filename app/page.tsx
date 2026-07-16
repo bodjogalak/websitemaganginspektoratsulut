@@ -45,19 +45,19 @@ export default async function LandingPage() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#1193b5]"></span>
             </span>
-            Open Registration for Batch 2026
+            Pendaftaran Terbuka Untuk Angkatan 2026
           </div>
           
           <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight mb-8 leading-tight">
-            Start Your Career Journey <br />
+            Mulai Perjalanan Karir Anda <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-[#1193b5] to-blue-600">
-              With Us Today.
+              Dengan Kita Hari ini.
             </span>
           </h1>
           
           <p className="text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Apply for internships at Inspektorat. Gain real-world experience, 
-            work on impactful government projects, and build your professional network.
+            Melamar untuk magang di Inspektorat. Dapatkan pengalaman dunia nyata, 
+            bekerja pada proyek-proyek pemerintah yang membawa dampak, dan membangun relasi profesional anda.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -73,14 +73,14 @@ export default async function LandingPage() {
                 href="/register"
                 className="bg-[#1193b5] text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-blue transition shadow-lg hover:shadow-xl shadow-blue-200 flex items-center justify-center gap-2"
               >
-                Apply Now <ArrowRight size={20} />
+                Aplikasikan Sekarang <ArrowRight size={20} />
               </Link>
             )}
             <a 
                 href="#features"
                 className="bg-white text-gray-700 border border-gray-200 px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-50 transition flex items-center justify-center"
             >
-                Learn More
+                Belajar Lebih Lanjut
             </a>
           </div>
         </div>
@@ -90,8 +90,8 @@ export default async function LandingPage() {
       <section id="features" className="py-24 bg-white scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-                 <h2 className="text-base text-[#1193b5] font-bold tracking-wide uppercase mb-2">Benefits</h2>
-                 <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Why Join Us?</h2>
+                 <h2 className="text-base text-[#1193b5] font-bold tracking-wide uppercase mb-2">Benefit</h2>
+                 <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Mengapa Bergabung Dengan Kami?</h2>
                  <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">Rasakan pengalaman magang yang berbeda dengan terjun langsung ke dunia pemerintahan digital.</p>
             </div>
 
@@ -119,7 +119,7 @@ export default async function LandingPage() {
       <section id="process" className="py-24 bg-gray-50/50 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-                <h2 className="text-base text-[#1193b5] font-bold tracking-wide uppercase mb-2">How It Works</h2>
+                <h2 className="text-base text-[#1193b5] font-bold tracking-wide uppercase mb-2">Bagaimana Cara Kerjanya</h2>
                 <p className="text-3xl md:text-4xl font-extrabold text-gray-900">Alur Pendaftaran</p>
                 <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">4 langkah mudah menuju pengalaman magang yang berharga.</p>
             </div>
@@ -155,7 +155,7 @@ export default async function LandingPage() {
                     <div className="w-16 h-16 bg-white text-[#1193b5] rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl font-bold border-2 border-blue-50 shadow-sm z-10 relative">
                         <Award size={28} />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">4. Accepted</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">4. Diterima</h3>
                     <p className="text-gray-500 text-sm leading-relaxed">Unduh Surat Balasan resmi dan mulai perjalanan magang Anda!</p>
                 </div>
             </div>
@@ -168,9 +168,9 @@ export default async function LandingPage() {
          <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-black/10 rounded-full blur-3xl"></div>
          
          <div className="relative max-w-4xl mx-auto text-center px-4 z-10">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">Ready to Start Your Journey?</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">Siapkah Untuk Memulai Perjalanan Anda?</h2>
             <p className="text-blue-50 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
-                Kuota magang terbatas untuk setiap batch. Segera daftarkan diri Anda dan lengkapi berkas administrasi sekarang juga.
+                Kuota magang terbatas untuk setiap angkatan. Segera daftarkan diri Anda dan lengkapi berkas administrasi sekarang juga.
             </p>
             
             <div className="flex justify-center">
