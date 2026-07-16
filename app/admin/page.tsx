@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { Users, Clock, CheckCircle2, AlertCircle, FolderCode, CalendarCheck } from "lucide-react";
 import Link from "next/link";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -31,6 +34,37 @@ export default function AdminDashboard() {
     fetchStats();
   }, []);
 
+
+
+    // Function to generate PDF
+ const generatePDF = () => {
+  const doc = new jsPDF();
+
+  // Judul PDF
+  doc.setFontSize(18);
+  doc.text("Laporan Rekapitulasi Peserta Magang", 14, 22);
+
+  // Data Table
+  const tableColumn = ["Kategori", "Jumlah"];
+  const tableRows = [
+    ["Peserta Mahasiswa mendaftar", `${stats.presentToday} / ${stats.totalInterns}`],
+    ["Pendaftar Baru yang sudah di acc(disetujui)/terima", stats.pendingApplications.toString()], // Pastikan string agar aman
+  ];
+
+  // 2. Panggil autoTable secara langsung dengan mengoper instance 'doc' di dalamnya
+  autoTable(doc, {
+    startY: 30,
+    head: [tableColumn],
+    body: tableRows,
+    theme: "grid",
+    headStyles: { fillColor: [37, 99, 235] }, // Warna biru Tailwind (bg-blue-600)
+  });
+
+  // Simpan PDF
+  doc.save("rekap-peserta-magang.pdf");
+};
+
+  
   return (
     <div className="p-6 md:p-8">
       {/* Header */}
@@ -98,7 +132,16 @@ export default function AdminDashboard() {
                 <FolderCode size={24} />
             </div>
         </div>
-
+        {/* Header dengan Tombol Download */}
+      <div className="flex justify-between items-center">
+        
+        <button
+          onClick={generatePDF}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition"
+        >
+          Cetak bentuk PDF
+        </button>
+      </div>
       </div>
 
       {/* QUICK ACTIONS / INFO */}
