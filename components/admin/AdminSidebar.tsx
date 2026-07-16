@@ -31,7 +31,6 @@ export default function AdminSidebar({ session }: AdminSidebarProps) {
     { href: "/admin/users", label: "Pengguna", icon: Users },
     { href: "/admin/attendance", label: "Rekap Absensi", icon: CalendarDays },
     { href: "/admin/projects", label: "Project Monitor", icon: FolderCode },
-    { href: "/admin/sertifikat", label: "Buat Sertifikat", icon: FileText }, // Use FolderCode icon
   ];
 
   return (
