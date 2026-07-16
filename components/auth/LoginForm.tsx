@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import fotoBackground from "@/app/foto_7ebc172801.jpg";
+import fotoBackground2 from "@/app/76785-640x358.jpg";
 import Image from "next/image";
 
 export default function LoginPage() {
@@ -12,6 +14,19 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+const listGambar = [fotoBackground, fotoBackground2];
+  const [indeksAktif, setIndeksAktif] = useState(0);
+
+  // 3. Efek timer otomatis untuk menukar gambar setiap 5 detik (5000ms)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndeksAktif((indeksSebelumnya) => 
+        indeksSebelumnya === listGambar.length - 1 ? 0 : indeksSebelumnya + 1
+      );
+    }, 5000);
+
+    return () => clearInterval(interval); // Bersihkan interval saat komponen mati
+  }, [listGambar.length]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,7 +64,17 @@ export default function LoginPage() {
       <div className="hidden lg:flex w-1/2 bg-linear-to-br from-blue-600 to-blue-800 flex-col justify-between p-10 text-white relative">
         <div className="absolute top-0 left-0 w-64 h-64 bg-white opacity-10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-white opacity-10 rounded-full translate-x-1/3 translate-y-1/3"></div>
-
+      {/* 4. BACKGROUND SLIDESHOW - Me-render semua gambar sekaligus agar transisinya mulus tanpa lag putih */}
+        {listGambar.map((gambar, indeks) => (
+          <div 
+            key={indeks}
+            className={`absolute inset-0 bg-cover bg-center mix-blend-overlay pointer-events-none transition-opacity duration-1000 ease-in-out ${
+              indeks === indeksAktif ? "opacity-30" : "opacity-0"
+            }`}
+            style={{ backgroundImage: `url(${gambar.src})` }}
+          />
+        ))}
+        
         <div className="z-10 mt-10">
           <h1 className="text-3xl xl:text-4xl font-bold mb-4 leading-tight">
               Portal Magang <br /> Inspektorat, <br /> Daerah <br /> Provinsi Sulawesi Utara
