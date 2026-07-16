@@ -28,8 +28,7 @@ export default function AdminMobileNav({ session }: { session: Session | null })
     { href: "/admin/permissions", label: "Izin & Absensi", icon: ClipboardCheck }, 
     { href: "/admin/users", label: "Pengguna", icon: Users },
     { href: "/admin/attendance", label: "Rekap Absensi", icon: CalendarDays },
-    { href: "/admin/projects", label: "Project Monitor", icon: FolderCode },
-    { href: "/admin/sertifikat", label: "Buat Sertifikat", icon: FileText }, 
+    { href: "/admin/projects", label: "Project Monitor", icon: FolderCode }, 
   ];
 
   return (
