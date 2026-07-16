@@ -56,6 +56,7 @@ The app uses a custom color palette defined in `app/globals.css`:
     periksa ini terinstall dulu diterminal di proyek kita, supaya kalau npm run dev tidak muncul error nantinya
     ```bash
     npm install jspdf
+    npm install jspdf jspdf-autotable
     ```
     
 6.  **Run the App**
