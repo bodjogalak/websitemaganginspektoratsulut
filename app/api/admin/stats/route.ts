@@ -19,7 +19,8 @@ export async function GET() {
     presentToday,
     pendingPermissions,
     pendingApplications,
-    totalProjects
+    totalProjects,
+    allParticipants // <-- Tambahkan variabel penampung untuk list peserta
   ] = await prisma.$transaction([
     // A. Count Active Interns (Role = USER)
     prisma.user.count({ where: { role: "USER" } }),
@@ -39,7 +40,28 @@ export async function GET() {
     prisma.application.count({ where: { status: "PENDING" } }),
 
     // E. Count Projects
-    prisma.project.count()
+    prisma.project.count(),
+
+    // F. TAMBAHKAN QUERY INI: Mengambil data detail seluruh peserta magang untuk tabel PDF
+    prisma.user.findMany({
+      where: {
+        id: {
+          gt: 1, // Mengambil id > 1 sesuai instruksi sebelumnya
+        },
+        role: "USER" // Mengambil yang bertindak sebagai peserta magang saja
+      },
+      select: {
+        id: true,
+        name: true,       // Sesuaikan dengan nama kolom nama di skema Prisma Anda (misal: name atau nama)
+        email: true,      // Kita tambahkan email atau instansi jika ada di skema Anda
+        role: true,
+        phone: true,   // <-- TAMBAHKAN INI
+        agency: true   // <-- TAMBAHKAN INI
+      },
+      orderBy: {
+        id: "asc"         // Diurutkan berdasarkan ID terkecil agar rapi di tabel
+      }
+    })
   ]);
 
   return NextResponse.json({
@@ -47,6 +69,7 @@ export async function GET() {
     presentToday,
     pendingPermissions,
     pendingApplications,
-    totalProjects
+    totalProjects,
+    allParticipants // <-- Masukkan ke dalam payload response JSON
   });
 }

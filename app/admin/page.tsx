@@ -6,6 +6,14 @@ import Link from "next/link";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
+// Definisikan tipe struktur data peserta dari database
+interface Participant {
+  id: number;
+  name?: string;
+  email?: string;
+  phone?: string;  // tambahkan ini
+  agency?: string; // tambahkan ini
+}
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -13,7 +21,8 @@ export default function AdminDashboard() {
     presentToday: 0,
     pendingPermissions: 0,
     pendingApplications: 0,
-    totalProjects: 0
+    totalProjects: 0,
+    allParticipants: [] as Participant[] // Tambahkan array penampung data peserta di sini
   });
   const [loading, setLoading] = useState(true);
 
@@ -35,34 +44,68 @@ export default function AdminDashboard() {
   }, []);
 
 
+   // Function to generate PDF
+  const generatePDF = () => {
+    const doc = new jsPDF();
 
-    // Function to generate PDF
- const generatePDF = () => {
-  const doc = new jsPDF();
+    // --- BAGIAN 1: JUDUL UTAMA ---
+    doc.setFontSize(18);
+    doc.text("Laporan Rekapitulasi Peserta Magang", 14, 20);
+    
+    doc.setFontSize(10);
+    doc.text(`Dicetak pada: ${new Date().toLocaleDateString("id-ID")}`, 14, 27);
 
-  // Judul PDF
-  doc.setFontSize(18);
-  doc.text("Laporan Rekapitulasi Peserta Magang", 14, 22);
+    // --- BAGIAN 2: TABEL RINGKASAN AKTIVITAS ---
+    doc.setFontSize(12);
+    doc.text("Ringkasan Aktivitas Aktivitas Magang", 14, 38);
 
-  // Data Table
-  const tableColumn = ["Kategori", "Jumlah"];
-  const tableRows = [
-    ["Peserta Mahasiswa mendaftar", `${stats.presentToday} / ${stats.totalInterns}`],
-    ["Pendaftar Baru yang sudah di acc(disetujui)/terima", stats.pendingApplications.toString()], // Pastikan string agar aman
-  ];
+    const summaryColumns = ["Kategori", "Jumlah"];
+    const summaryRows = [
+      ["Peserta Mahasiswa mendaftar (Hadir Hari Ini)", `${stats.presentToday} / ${stats.totalInterns}`],
+      ["Pendaftar Baru yang belum di acc(disetujui)/terima", stats.pendingApplications.toString()],
+    ];
 
-  // 2. Panggil autoTable secara langsung dengan mengoper instance 'doc' di dalamnya
-  autoTable(doc, {
-    startY: 30,
-    head: [tableColumn],
-    body: tableRows,
-    theme: "grid",
-    headStyles: { fillColor: [37, 99, 235] }, // Warna biru Tailwind (bg-blue-600)
-  });
+    autoTable(doc, {
+      startY: 43,
+      head: [summaryColumns],
+      body: summaryRows,
+      theme: "grid",
+      headStyles: { fillColor: [37, 99, 235] }, // Warna biru
+      margin: { bottom: 15 }
+    });
 
-  // Simpan PDF
-  doc.save("rekap-peserta-magang.pdf");
-};
+    // Ambil batas koordinat bawah tabel pertama agar tabel kedua tidak menumpuk berantakan
+    const finalY = (doc as any).lastAutoTable?.finalY || 70;
+
+    // --- BAGIAN 3: TABEL RINCIAN PESERTA (DARI DATABASE PRISMA) ---
+    doc.setFontSize(12);
+    doc.text("Daftar Detail Seluruh Peserta Magang", 14, finalY + 12);
+
+    // Tambahkan kolom "No. HP" dan "Instansi/Sekolah" di header tabel
+    const participantColumns = ["ID", "Nama Peserta", "Email", "No. HP", "Instansi/Sekolah"];
+    
+    // Looping data array dari state stats untuk diubah menjadi baris tabel (termasuk phone & agency)
+    const participantRows = (stats.allParticipants || []).map((peserta: any) => [
+      peserta.id.toString(),
+      peserta.name || "-",
+      peserta.email || "-",
+      peserta.phone || "-",  // <-- Menampilkan data phone
+      peserta.agency || "-"   // <-- Menampilkan data agency
+    ]);
+
+    autoTable(doc, {
+      startY: finalY + 18,
+      head: [participantColumns],
+      body: participantRows,
+      theme: "striped", // Desain baris selang-seling agar terlihat profesional
+      headStyles: { fillColor: [14, 122, 150] }, // Menyesuaikan warna gradasi teal dashboard Anda (#0e7a96)
+      styles: { fontSize: 9 }, // Ukuran font sedikit dikecilkan ke 9 agar kolom yang banyak tidak terpotong ke samping
+    });
+
+    // Simpan PDF ke komputer admin
+    doc.save("rekap-peserta-magang.pdf");
+  };
+
 
   
   return (
@@ -132,16 +175,16 @@ export default function AdminDashboard() {
                 <FolderCode size={24} />
             </div>
         </div>
+
         {/* Header dengan Tombol Download */}
-      <div className="flex justify-between items-center">
-        
-        <button
-          onClick={generatePDF}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition"
-        >
-          Cetak bentuk PDF
-        </button>
-      </div>
+        <div className="flex justify-between items-center">
+          <button
+            onClick={generatePDF}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition"
+          >
+            Cetak bentuk PDFnya
+          </button>
+        </div>
       </div>
 
       {/* QUICK ACTIONS / INFO */}
@@ -175,3 +218,4 @@ export default function AdminDashboard() {
     </div>
   );
 }
+

@@ -213,11 +213,12 @@ export default function AttendancePage() {
       setIsCameraActive(true); 
   };
    
-  const handleCheckIn = async (match: faceapi.FaceMatch, isSmiling: boolean) => {
-    if (Date.now() - lastCheckInRef.current < 5000 || isSubmittingRef.current) return;
-    if (match.label === 'unknown' || !isSmiling) return; 
+  const handleCheckIn = async (label: string, isSmiling: boolean) => {
+  if (Date.now() - lastCheckInRef.current < 5000 || isSubmittingRef.current) return;
+  if (label === 'unknown' || !isSmiling) return; // Menggunakan label, bukan match.label
 
-    isSubmittingRef.current = true;
+  isSubmittingRef.current = true;
+
     setStatusMsg(mode === 'CHECK_OUT' ? "Memproses Absen Pulang..." : "Verifikasi Lokasi...");
     
     const apiEndpoint = mode === 'CHECK_OUT' ? '/api/attendance/checkout' : '/api/attendance/check-in';

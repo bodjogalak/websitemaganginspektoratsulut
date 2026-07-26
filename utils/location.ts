@@ -1,8 +1,8 @@
-// Diskominfo Sulut Office Coordinates
+// Inspektorat Provinsi Sulut Office Coordinates
 export const OFFICE_LOCATION = {
-  lat: 1.469940076052675,
-  lng: 124.84486754110868
-};
+  lat: 1.4699796311695157,
+  lng: 124.8466265521413
+}; 
 
 // Maximum allowed distance in meters
 export const MAX_DISTANCE_METERS = 132.52; 

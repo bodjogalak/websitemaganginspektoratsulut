@@ -51,7 +51,7 @@ export default async function LandingPage() {
           <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight mb-8 leading-tight">
             Mulai Perjalanan Karir Anda <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-[#1193b5] to-blue-600">
-              Dengan Kita Hari ini.
+              Dengan Kami Hari ini.
             </span>
           </h1>
           
