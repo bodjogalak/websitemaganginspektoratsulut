@@ -45,9 +45,6 @@ export async function GET() {
     // F. TAMBAHKAN QUERY INI: Mengambil data detail seluruh peserta magang untuk tabel PDF
     prisma.user.findMany({
       where: {
-        id: {
-          gt: 1, // Mengambil id > 1 sesuai instruksi sebelumnya
-        },
         role: "USER" // Mengambil yang bertindak sebagai peserta magang saja
       },
       select: {
