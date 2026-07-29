@@ -45,7 +45,7 @@ export default async function LandingPage() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#1193b5]"></span>
             </span>
-            Pendaftaran Terbuka Untuk Angkatan {new Date()}
+            Pendaftaran Terbuka Untuk Angkatan {new Date().toLocaleDateString("id-ID")}
           </div>
           
           <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight mb-8 leading-tight">
