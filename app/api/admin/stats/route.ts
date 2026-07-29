@@ -53,7 +53,7 @@ export async function GET() {
         email: true,      // Kita tambahkan email atau instansi jika ada di skema Anda
         role: true,
         phone: true,   // <-- TAMBAHKAN INI
-        peran: true   // <-- TAMBAHKAN INI
+        agency: true   // <-- TAMBAHKAN INI
       },
       orderBy: {
         id: "asc"         // Diurutkan berdasarkan ID terkecil agar rapi di tabel
