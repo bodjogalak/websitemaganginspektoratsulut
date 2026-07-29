@@ -13,6 +13,7 @@ interface Participant {
   email?: string;
   phone?: string;  // tambahkan ini
   agency?: string; // tambahkan ini
+  createdAt?: string;
 }
 
 export default function AdminDashboard() {
@@ -82,8 +83,14 @@ export default function AdminDashboard() {
     doc.text("Daftar Detail Seluruh Peserta Magang", 14, finalY + 12);
 
     // Tambahkan kolom "No. HP" dan "Instansi/Sekolah" di header tabel
-    const participantColumns = ["ID", "Nama Peserta", "Email", "No. HP", "Instansi/Sekolah"];
-    
+    const participantColumns = [
+  "ID",
+  "Nama Peserta",
+  "Email",
+  "No. HP",
+  "Instansi/Sekolah",
+  "Tanggal Daftar"
+];
     // Looping data array dari state stats untuk diubah menjadi baris tabel (termasuk phone & agency)
     const participantRows = (stats.allParticipants || []).map((peserta: any) => [
       peserta.id.toString(),
@@ -91,6 +98,15 @@ export default function AdminDashboard() {
       peserta.email || "-",
       peserta.phone || "-",  // <-- Menampilkan data phone
       peserta.agency || "-"   // <-- Menampilkan data agency
+      peserta.createdAt
+    ? new Date(peserta.createdAt).toLocaleString("id-ID", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+    : "-"
     ]);
 
     autoTable(doc, {
