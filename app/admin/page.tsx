@@ -11,8 +11,10 @@ interface Participant {
   id: number;
   name?: string;
   email?: string;
-  phone?: string;  // tambahkan ini
-  agency?: string; // tambahkan ini
+  phone?: string;
+  agency?: string;
+  bidang?: string;
+  peran?: string;
   createdAt?: string;
 }
 
@@ -89,8 +91,19 @@ export default function AdminDashboard() {
   "Email",
   "No. HP",
   "Instansi/Sekolah",
+  "Bidang", 
+  "Peran", 
   "Tanggal Daftar"
 ];
+
+  const formatEnum = (value?: string) => {
+  if (!value || value === "UNASSIGNED") return "-";
+
+  return value
+    .replace(/_/g, " ")
+    .toLowerCase()
+    .replace(/\b\w/g, c => c.toUpperCase());
+};    
     // Looping data array dari state stats untuk diubah menjadi baris tabel (termasuk phone & agency)
     const participantRows = (stats.allParticipants || []).map((peserta: any) => [
       peserta.id.toString(),
@@ -98,6 +111,8 @@ export default function AdminDashboard() {
       peserta.email || "-",
       peserta.phone || "-",  // <-- Menampilkan data phone
       peserta.agency || "-",   // <-- Menampilkan data agency
+      formatEnum(peserta.bidang),
+      formatEnum(peserta.peran),
       peserta.createdAt
     ? new Date(peserta.createdAt).toLocaleString("id-ID", {
         day: "2-digit",
