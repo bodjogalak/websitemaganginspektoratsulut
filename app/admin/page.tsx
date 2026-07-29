@@ -97,7 +97,7 @@ export default function AdminDashboard() {
       peserta.name || "-",
       peserta.email || "-",
       peserta.phone || "-",  // <-- Menampilkan data phone
-      peserta.agency || "-"   // <-- Menampilkan data agency
+      peserta.agency || "-",   // <-- Menampilkan data agency
       peserta.createdAt
     ? new Date(peserta.createdAt).toLocaleString("id-ID", {
         day: "2-digit",
