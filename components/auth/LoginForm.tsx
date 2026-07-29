@@ -51,7 +51,7 @@ const listGambar = [fotoBackground, fotoBackground2];
         router.push("/dashboard");
       }
       
-      router.refresh();
+     
     }
   };
 
