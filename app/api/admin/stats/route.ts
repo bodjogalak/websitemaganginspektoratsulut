@@ -54,6 +54,8 @@ export async function GET() {
         role: true,
         phone: true,   // <-- TAMBAHKAN INI
         agency: true,   // <-- TAMBAHKAN INI
+        bidang: true,
+        peran: true,
         createdAt: true
       },
       orderBy: {
